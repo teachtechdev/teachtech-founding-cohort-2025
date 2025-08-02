@@ -1,15 +1,86 @@
-# About the Repository
-This repo will have all the students projects. All students must fork and add their projects to this folder submit their projects. 
+# TeachTech Student Projects – Summer 2025
 
-# Hub Friday Projects 
-We are introducing high school kids to AI and Python. The goal is make few simple projects where kids learn how to use APIs and be able to fetch data from them.
+Welcome to the official TeachTech Student Projects repository!  
+This repo is home to all student-led projects created as part of the **Summer 2025 Founding Cohort**.
 
-### Summer 2025 - three tracks 
+All students are required to **fork this repository** and submit their projects by creating a dedicated folder under their name.
 
-- 🐍 Python to AI Track: Learn Python basics, then build real AI applications.
+---
 
-- ☕️ Java CSA Track: Get ready for AP CSA with Java.
+## 🎯 About TeachTech
 
-- 🚀 Advanced Track: Showcase your hackathons, projects and more.
+TeachTech is a peer-to-peer learning platform built for and by students. Through hands-on mentorship and technical collaboration, we foster leadership, creativity, and real-world coding skills among high school students.
 
-After completion, you will be receiving a Digital certificate with the URL.
+After successful submission, a **digital certificate** will be issued with their live project URL!
+
+---
+
+## 🛠 Program Tracks
+
+### 1️⃣ Python to AI
+- Learn python fundamentals
+- Work with APIs
+- Create beginner-friendly AI apps
+
+### 2️⃣ CSA Java
+- Java basics
+- Build console-based Java apps
+- 
+### 3️⃣ Advanced Track
+- Build two-three projects
+- Self-directed, with mentoring support
+----
+## 📁 Folder & Project Structure
+
+Please follow the format below **exactly** when submitting:
+
+```
+Firstname_lastName
+|
+|__Project 1 folder (mandatory)
+            |--app.py
+            |__README.md
+|__Project 2 folder (if applicable)
+            |--java program
+            |__...
+|__Project 3 folder (mandatory)
+            |--index.html
+            |__styles.js
+            ├── ...
+```
+- Use appropriate file names and extensions.
+- Each `README.md` inside project folders should include:
+  - **Project title**
+  - **Short description**
+  - **What you learned**
+  - (Optional) Screenshots or links if hosted
+
+## How to Submit
+1. **Fork this repository** to your own GitHub account
+2. Add your project folder following the structure above
+3. Commit your changes with a clear message
+4. **Open a Pull Request** to the main branch of this repo
+
+---
+
+## 🎓 Certification
+
+All students who submit their projects by the final week will receive a **Digital Certificate** of participation from TeachTech, linked to their GitHub profile.
+
+----
+
+## 🌟 Recognition
+
+- All contributors will be added to our Hall of Fame.
+- Outstanding projects may be featured on our [TeachTech website](https://teachtech.dev) and social media.
+
+---
+
+## 📜 License
+
+All project code submitted here is under the MIT License unless otherwise noted in the student's folder. TeachTech maintains the right to display project content (with proper credit) for educational purposes.
+
+---
+
+Have questions? DM us on [Discord](https://discord.com/invite/qP8tCYpxtj) or open an issue in this repo.
+
