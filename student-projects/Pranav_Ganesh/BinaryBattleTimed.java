@@ -1,3 +1,4 @@
+// File: BinaryBattleTimed.java
 package BinaryBattle;
 
 import java.util.Random;
@@ -20,23 +21,22 @@ public class BinaryBattleTimed {
                 + WIN_POINTS + " points wins) ===\n");
 
         while (points[0] < WIN_POINTS && points[1] < WIN_POINTS) {
-            // 1) generate a new puzzle, random mode each round
-            Puzzle puzzle = genPuzzle();
-
-            // 2) Player 1’s turn
+            // Player 1’s independent puzzle
+            Puzzle puzzle1 = genPuzzle();
             System.out.println("Player 1, HIT ENTER to get your puzzle and start!");
-            long time1 = playTimedTurn(1, puzzle);
+            long time1 = playTimedTurn(1, puzzle1);
 
-            // 3) Player 2’s turn
+            // Player 2’s independent puzzle
+            Puzzle puzzle2 = genPuzzle();
             System.out.println("\nPlayer 2, HIT ENTER to get your puzzle and start!");
-            long time2 = playTimedTurn(2, puzzle);
+            long time2 = playTimedTurn(2, puzzle2);
 
-            // 4) compare times & award a point
+            // compare times & award a point
             if      (time1 < time2) { points[0]++; System.out.println("→ Player 1 wins the round!"); }
             else if (time2 < time1) { points[1]++; System.out.println("→ Player 2 wins the round!"); }
             else                    { System.out.println("→ Tie—no points awarded."); }
 
-            // 5) display current score
+            // display current score
             System.out.printf("Score: P1=%d   P2=%d%n%n", points[0], points[1]);
         }
 
@@ -52,7 +52,7 @@ public class BinaryBattleTimed {
      * and returns elapsed time in milliseconds.
      */
     private long playTimedTurn(int player, Puzzle puzzle) {
-        scanner.nextLine();  // wait for the player to hit ENTER
+        scanner.nextLine();  // wait for ENTER
         System.out.println("Puzzle: " + puzzle.getPrompt());
 
         long start = System.nanoTime();
@@ -77,14 +77,14 @@ public class BinaryBattleTimed {
      *  - 8-bit binary → Decimal
      */
     private Puzzle genPuzzle() {
-        int value     = rand.nextInt(256);
-        boolean d2b   = rand.nextBoolean();
-        String prompt;
+        int value   = rand.nextInt(256);
+        boolean d2b = rand.nextBoolean();
 
         // always build the 8-bit version internally
         String binStr = String.format("%8s", Integer.toBinaryString(value))
                 .replace(' ', '0');
 
+        String prompt;
         if (d2b) {
             prompt = "Convert decimal " + value + " to 8-bit binary";
         } else {
@@ -113,16 +113,9 @@ public class BinaryBattleTimed {
             return prompt;
         }
 
-        /**
-         * Accepts either:
-         *  - padded 8-bit binary (e.g. 00111100)
-         *  - minimal binary (e.g. 111100)
-         * for decimal→binary rounds, or the plain decimal answer for binary→decimal.
-         */
         public boolean isCorrect(String userAnswer) {
             if (decToBin) {
                 try {
-                    // parse the user’s binary string
                     int parsed = Integer.parseInt(userAnswer, 2);
                     return parsed == value;
                 } catch (NumberFormatException e) {
@@ -130,7 +123,6 @@ public class BinaryBattleTimed {
                 }
             } else {
                 try {
-                    // parse the user’s decimal string
                     int parsed = Integer.parseInt(userAnswer);
                     return parsed == value;
                 } catch (NumberFormatException e) {
