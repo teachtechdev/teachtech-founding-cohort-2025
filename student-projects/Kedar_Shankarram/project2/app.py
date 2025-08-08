@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, render_template
 import requests
 
-API_KEY = 'b7e9fce549976207cafb0ce8171b13f5add30c831528894a04fc26e8e1c6418b'
+API_KEY = ' '
 
 app = Flask(__name__)
 
@@ -63,3 +63,4 @@ def chat():
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
+
