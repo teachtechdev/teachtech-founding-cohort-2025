@@ -1,58 +1,118 @@
 from flask import Flask, request, jsonify, render_template
-import requests
+import requests, os
 
-API_KEY = ""
+API_KEY = '0a699ed169bc8b0deeddb6f83088bd6dbccf3830f0ef5d5ddf8d0524cdb7bef8'  
 
-app = Flask(__name__) 
+
+app = Flask(__name__)
+
 
 @app.route('/')
-def index():     
+
+def index():
+
     return render_template('index.html')
 
+
 @app.route('/api/chat', methods=['POST'])
+
 def chat():
-    user_prompt = request.json.get('prompt', '').strip()
+
+    user_prompt = (request.json or {}).get('prompt', '').strip()
+
     if not user_prompt:
-        return jsonify(reply="Please enter a question.")
+
+        return jsonify(error="Please enter a question."), 400
+
 
     payload = {
-    "model": "meta-llama/Llama-3.3-70B-Instruct-Turbo-Free",
-    "messages": [
-        {"role": "system", "content": "You are a friendly AI assistant to help answer questions about dance, dance clothes, dance shoes, etc. "
-        "Questions may range from what shoes should I wear for hip-hop and what clothes should wear lyrical."
-    },
-        {"role": "user", "content": user_prompt}
-    ],
-    "max_tokens": 500,
-    "temperature": 0.2
-}
+
+        "model": "meta-llama/Llama-3.3-70B-Instruct-Turbo-Free",
+
+        "messages": [
+
+            {
+
+                "role": "system",
+
+                "content": (
+
+                    "You are a friendly Ai assistant who answers questions about dance and all types of it. "
+
+                    "Questions can range from what shoes to wear to lyrical and what proper attire for ballet."
+
+                )
+
+            },
+
+            {"role": "user", "content": user_prompt}
+
+        ],
+
+        "max_tokens": 500,
+
+        "temperature": 0.2
+
+    }
 
 
     headers = {
+
         "Authorization": f"Bearer {API_KEY}",
+
         "Content-Type": "application/json"
+
     }
 
-    resp = requests.post(
-        "https://api.together.ai/v1/chat/completions",
-        json=payload,
-        headers=headers,
-        timeout= (5,30)
-    )
 
-    data = resp.json()
-    print("TogetherAI raw:", data)
+    try:
 
-    reply = None
-    if isinstance(data,dict):
-        try:
-            reply = data["choices"]["0"]["message"]
-        except Exception:
-            pass
+        r = requests.post(
 
-    if not reply:
-        reply = "Sorry, I couldn't get an answer."
+            "https://api.together.ai/v1/chat/completions",
 
-    return jsonify(reply=reply)
+            json=payload, headers=headers, timeout=60
+
+        )
+
+        r.raise_for_status()
+
+        data = r.json()
+
+        reply = (
+
+            data.get("choices", [{}])[0]
+
+                .get("message", {})
+
+                .get("content")
+
+            or data.get("choices", [{}])[0].get("text")
+
+            or "Sorry, I couldn’t get an answer."
+
+        )
+
+        return jsonify(reply=reply)
+
+    except requests.Timeout:
+
+        return jsonify(error="Upstream model timed out. Try again."), 504
+
+    except requests.HTTPError:
+
+        # Return first 200 chars so the client sees something useful
+
+        return jsonify(error=f"Upstream error {r.status_code}: {r.text[:200]}"), 502
+
+    except Exception as e:
+
+        app.logger.exception("Server error")
+
+        return jsonify(error="Server error. Check logs."), 500
+
+
 if __name__ == '__main__':
-    app.run(debug=True, port = 5000)
+
+    app.run(debug=True, port=5000)
+	
