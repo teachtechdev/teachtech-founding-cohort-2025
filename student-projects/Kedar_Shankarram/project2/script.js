@@ -22,13 +22,26 @@ form.addEventListener('submit', async e => {
   try {
     const res = await fetch('/api/chat', {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({prompt})
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt })
     });
-    const { reply } = await res.json();
-    messages.lastChild.textContent = reply;
+
+    if (!res.ok) {
+      const txt = await res.text();
+      throw new Error(`Server ${res.status}: ${txt.slice(0, 200)}`);
+    }
+
+    const ct = res.headers.get('content-type') || '';
+    const data = ct.includes('application/json')
+      ? await res.json()
+      : { error: await res.text() };
+
+    messages.lastChild.textContent = data.error
+      ? `Error: ${data.error}`
+      : data.reply;
+
   } catch (err) {
     console.error(err);
-    messages.lastChild.textContent = 'Error contacting API.';
+    messages.lastChild.textContent = 'Network or server error. Try again.';
   }
 });
