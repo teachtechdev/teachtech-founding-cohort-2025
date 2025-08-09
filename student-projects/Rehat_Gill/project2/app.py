@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, render_template
 import requests, os
 
-API_KEY = '0a699ed169bc8b0deeddb6f83088bd6dbccf3830f0ef5d5ddf8d0524cdb7bef8'  
+API_KEY = ''  
 
 
 app = Flask(__name__)
@@ -116,3 +116,4 @@ if __name__ == '__main__':
 
     app.run(debug=True, port=5000)
 	
+
