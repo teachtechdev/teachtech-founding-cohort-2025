@@ -11,6 +11,8 @@ All students are required to **fork this repository** and submit their projects 
 
 TeachTech is a peer-to-peer learning platform built for and by students. Through hands-on mentorship and technical collaboration, we foster leadership, creativity, and real-world coding skills among high school students.
 
+Please find the founding cohort project details here [Student Projects](https://github.com/teachtechdev/teachtech-founding-cohort-2025/blob/main/student-projects/StudentProjects.md).
+
 After successful submission, a **digital certificate** will be issued with their live project URL!
 
 ---
