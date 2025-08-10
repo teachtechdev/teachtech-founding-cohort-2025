@@ -27,7 +27,6 @@ After successful submission, a **digital certificate** will be issued with their
 ### 2️⃣ CSA Java
 - Java basics
 - Build console-based Java apps
-- 
 ### 3️⃣ Advanced Track
 - Build two-three projects
 - Self-directed, with mentoring support
