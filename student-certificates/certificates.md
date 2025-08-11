@@ -5,7 +5,7 @@
 * Rehat Gill - Participant
 * Jonathan Kim - Instructor + Participant
 * Kedar Shankarram - Student coordinator + Participant
-* Pranav Ganesh - Instructor + Student coordinator + Participant
+* [Pranav Ganesh](https://credsverse.com/credentials/d7a58cfd-c792-449f-b3be-14abfdaf8acb)
 * Amy Chan - Instructor
 * Dino Wun - Speaker sessions
 
